@@ -9,6 +9,7 @@ import { BadgeModule } from 'primeng/badge';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { EntitiesFeatureHomepageModule } from '@angular-monorepo/entities/feature-homepage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     AvatarModule,
     PanelMenuModule,
+    MenuModule,
     BadgeModule,
     AvatarGroupModule,
     EntitiesFeatureHomepageModule,
