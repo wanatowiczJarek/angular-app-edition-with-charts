@@ -2,7 +2,9 @@
   "name": "@angular-monorepo/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "npx run server location-app"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~16.2.0",
