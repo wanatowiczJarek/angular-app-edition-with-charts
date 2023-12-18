@@ -13,6 +13,7 @@ import { MenuModule } from 'primeng/menu';
 import { EntitiesDataRepositoryModule } from '@angular-monorepo/entities/data-repository';
 import { EntityService } from 'libs/entities/data-repository/src/lib/services/entity.service';
 import { MockEntityService } from 'libs/entities/data-repository/src/lib/services/mock-entity.service';
+import { TableModule } from 'primeng/table';
 
 function EntitiesDataServiceFactory() {
   const useMock = true;
@@ -31,6 +32,7 @@ function EntitiesDataServiceFactory() {
     MenuModule,
     BadgeModule,
     AvatarGroupModule,
+    TableModule,
     EntitiesFeatureHomepageModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
   ],

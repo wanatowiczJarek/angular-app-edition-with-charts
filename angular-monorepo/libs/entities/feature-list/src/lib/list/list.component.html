@@ -1,1 +1,25 @@
-<p>List works!</p>
+<p-table [value]="entityList" [tableStyle]="{ 'min-width': '320px' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Tracking Id</th>
+      <th>Name</th>
+      <th>Entity Type</th>
+      <th>Entity Status</th>
+      <th>Is Active</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-entity>
+    <tr>
+      <td>{{ entity.trackingId }}</td>
+      <td>{{ entity.name }}</td>
+      <td>{{ entity.entityType }}</td>
+      <td>{{ entity.entityStatus }}</td>
+      <td>
+        <span *ngIf="!entity.isActive">
+          <i class="pi pi-exclamation-triangle" [ngStyle]="{'color': 'var(--red-500)'}"></i> Inactive
+        </span>
+        <span *ngIf="entity.isActive">Yes</span>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

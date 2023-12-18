@@ -102,7 +102,11 @@ export class MockEntityService {
   ];
 
   getEntityList(getEntityListParams?: GetEntityListParams): Observable<EntityListItem[]> {
-    return of([]);
+    return of(this.entities.map(entity => {
+      const { attributes, ...entityListItem } = entity;
+
+      return entity;
+    }));
   }
 
   getEntityDetails(entityId: string): Observable<EntityDetails> {
