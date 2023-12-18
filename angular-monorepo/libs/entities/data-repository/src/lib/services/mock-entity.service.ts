@@ -1,12 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Employee, EntityDetails, EntityListItem, EntityType, EntityUpdateDto, GetEntityListParams, LocationStats } from "../model/model";
-import { Observable, of } from 'rxjs';
+import { Observable, mergeMap, of, throwError, timer } from 'rxjs';
 
 @Injectable()
 export class MockEntityService {
 
-  constructor() {
-    console.log('mockedEntityService');
+  delayWithRandomError<T>(): (source: Observable<T>) => Observable<T> {
+    const delayMs = 1000;
+    const errorProbability = 0.1;
+
+    return (source: Observable<T>) =>
+      timer(delayMs).pipe(
+        mergeMap(() => {
+          if (Math.random() < errorProbability) {
+            return throwError({ status: 403, message: 'Forbidden' });
+          }
+
+          return source;
+        })
+      );
   }
 
   entities: EntityDetails[] = [
@@ -101,12 +113,15 @@ export class MockEntityService {
     { id: 'id1', name: 'Jacob Holland' },
   ];
 
+
   getEntityList(getEntityListParams?: GetEntityListParams): Observable<EntityListItem[]> {
     return of(this.entities.map(entity => {
       const { attributes, ...entityListItem } = entity;
 
       return entity;
-    }));
+    })).pipe(
+      this.delayWithRandomError()
+    );
   }
 
   getEntityDetails(entityId: string): Observable<EntityDetails> {
@@ -118,7 +133,9 @@ export class MockEntityService {
       entityStatus: '',
       isActive: false,
       attributes: [],
-    });
+    }).pipe(
+      this.delayWithRandomError()
+    );
   }
 
   updateEntity(entityUpdateDto: EntityUpdateDto, entityId: string): Observable<EntityDetails> {
@@ -130,17 +147,23 @@ export class MockEntityService {
       entityStatus: '',
       isActive: false,
       attributes: [],
-    });
+    }).pipe(
+      this.delayWithRandomError()
+    );
   }
 
   getEntityTypes(): Observable<EntityType[]> {
-    return of([]);
+    return of([]).pipe(
+      this.delayWithRandomError()
+    );
   }
 
   getLocationStats(): Observable<LocationStats> {
     return of({
       lastWeekLocationOccupancy: [],
       lastWeekEmployeesVisits: [],
-    });
+    }).pipe(
+      this.delayWithRandomError()
+    );
   }
 }
