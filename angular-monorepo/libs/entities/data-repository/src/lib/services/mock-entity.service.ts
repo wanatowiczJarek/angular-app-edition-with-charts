@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Employee, EntityDetails, EntityListItem, EntityType, EntityUpdateDto, GetEntityListParams, LocationStats } from "../model/model";
-import { Observable, mergeMap, of, throwError, timer } from 'rxjs';
+import { Observable, mergeMap, of, switchMap, throwError, timer } from 'rxjs';
 
 @Injectable()
 export class MockEntityService {
@@ -125,15 +125,16 @@ export class MockEntityService {
   }
 
   getEntityDetails(entityId: string): Observable<EntityDetails> {
-    return of({
-      entityId: '',
-      trackingId: '',
-      name: '',
-      entityType: '',
-      entityStatus: '',
-      isActive: false,
-      attributes: [],
-    }).pipe(
+    return of(this.entities).pipe(
+      switchMap(entities => {
+        const foundEntity = entities.find(entity => entity.entityId === entityId);
+
+        if (!foundEntity) {
+          return throwError(new Error('Entity not found'));
+        }
+
+        return of(foundEntity);
+      }),
       this.delayWithRandomError()
     );
   }
@@ -153,7 +154,7 @@ export class MockEntityService {
   }
 
   getEntityTypes(): Observable<EntityType[]> {
-    return of([]).pipe(
+    return of(this.entityTypes).pipe(
       this.delayWithRandomError()
     );
   }

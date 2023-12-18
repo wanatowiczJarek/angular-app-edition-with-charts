@@ -1,0 +1,46 @@
+<div *ngIf="entityDetails" class="grid">
+  <div *ngIf="!editMode" class='col p-3'>
+    <div class="p-card p-component">
+      <div class="p-card-body">
+        <p><strong>Tracking ID:</strong> {{ entityDetails.trackingId }}</p>
+        <p><strong>Name:</strong> {{ entityDetails.name }}</p>
+        <p><strong>Entity Type:</strong> {{ entityDetails.entityType }}</p>
+        <p><strong>Entity Status:</strong> {{ entityDetails.entityStatus }}</p>
+        <p><strong>Is Active:</strong> {{ entityDetails.isActive ? 'Yes' : 'No' }}</p>
+        <button (click)="editMode = true" class="p-button p-component p-button-info">Edit</button>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="entityForm" *ngIf="editMode" class='col p-3'>
+    <div class="grid">
+      <div class="col-12 lg:col-4">
+        <div class="flex flex-column gap-2">
+          <label for="trackingId">Tracking Id</label>
+          <input pInputText formControlName="trackingId" id="trackingId" placeholder='Tracking Id' />
+          <small>Enter your tracking Id.</small>
+        </div>
+      </div>
+      <div class="col-12 lg:col-4">
+        <div class="flex flex-column gap-2">
+          <label for="name">Name</label>
+          <input pInputText formControlName="name" id="name" placeholder='Name' />
+          <small>Enter your name.</small>
+        </div>
+      </div>
+      <div class="col-12 lg:col-4">
+        <div class="flex flex-column gap-2">
+          <label for="entityType">Entity Type</label>
+          <p-dropdown class="p-fluid" formControlName="entityType" [options]="availableEntityTypes" optionLabel="name"
+            optionValue="id" placeholder="Select a Type" [showClear]="true"></p-dropdown>
+          <small>Select a type.</small>
+        </div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col-12 md:col-2">
+        <button type="submit" (click)='handleSave()' class="p-button p-component p-button-success">Save</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -14,6 +14,7 @@ import { EntitiesDataRepositoryModule } from '@angular-monorepo/entities/data-re
 import { EntityService } from 'libs/entities/data-repository/src/lib/services/entity.service';
 import { MockEntityService } from 'libs/entities/data-repository/src/lib/services/mock-entity.service';
 import { TableModule } from 'primeng/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 function EntitiesDataServiceFactory() {
   const useMock = true;
@@ -34,6 +35,8 @@ function EntitiesDataServiceFactory() {
     AvatarGroupModule,
     TableModule,
     EntitiesFeatureHomepageModule,
+    ReactiveFormsModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
   ],
   providers: [
