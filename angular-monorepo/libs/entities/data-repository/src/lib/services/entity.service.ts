@@ -5,42 +5,46 @@ import { Observable, of } from 'rxjs';
 @Injectable()
 export class EntityService {
 
-    getEntityList(getEntityListParams: GetEntityListParams): Observable<EntityListItem[]> {
-        return of([]);
-    }
+  constructor() {
+    console.log('entitityService');
+  }
 
-    getEntityDetails(entityId: string): Observable<EntityDetails> {
-        return of({
-            entityId: '',
-            trackingId: '',
-            name: '',
-            entityType: '',
-            entityStatus: '',
-            isActive: false,
-            attributes: [],
-        });
-    }
+  getEntityList(getEntityListParams?: GetEntityListParams): Observable<EntityListItem[]> {
+    return of([]);
+  }
 
-    updateEntity(entityUpdateDto: EntityUpdateDto, entityId: string): Observable<EntityDetails> {
-        return of({
-            entityId: '',
-            trackingId: '',
-            name: '',
-            entityType: '',
-            entityStatus: '',
-            isActive: false,
-            attributes: [],
-        });
-    }
+  getEntityDetails(entityId: string): Observable<EntityDetails> {
+    return of({
+      entityId: '',
+      trackingId: '',
+      name: '',
+      entityType: '',
+      entityStatus: '',
+      isActive: false,
+      attributes: [],
+    });
+  }
 
-    getEntityTypes(): Observable<EntityType[]> {
-        return of([]);
-    }
+  updateEntity(entityUpdateDto: EntityUpdateDto, entityId: string): Observable<EntityDetails> {
+    return of({
+      entityId: '',
+      trackingId: '',
+      name: '',
+      entityType: '',
+      entityStatus: '',
+      isActive: false,
+      attributes: [],
+    });
+  }
 
-    getLocationStats(): Observable<LocationStats> {
-        return of({
-            lastWeekLocationOccupancy: [],
-            lastWeekEmployeesVisits: [],
-        });
-    }
+  getEntityTypes(): Observable<EntityType[]> {
+    return of([]);
+  }
+
+  getLocationStats(): Observable<LocationStats> {
+    return of({
+      lastWeekLocationOccupancy: [],
+      lastWeekEmployeesVisits: [],
+    });
+  }
 }

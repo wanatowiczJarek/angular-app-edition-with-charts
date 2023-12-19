@@ -2,7 +2,9 @@
   "name": "@angular-monorepo/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "npx nx serve location-app"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~16.2.0",
@@ -14,6 +16,8 @@
     "@angular/platform-browser-dynamic": "~16.2.0",
     "@angular/router": "~16.2.0",
     "@nx/angular": "16.10.0",
+    "highcharts": "^11.2.0",
+    "highcharts-angular": "^4.0.0",
     "leaflet": "^1.9.4",
     "primeicons": "^6.0.1",
     "primeng": "^16.4.2",
