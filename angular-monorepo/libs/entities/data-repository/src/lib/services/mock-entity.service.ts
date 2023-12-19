@@ -160,9 +160,20 @@ export class MockEntityService {
   }
 
   getLocationStats(): Observable<LocationStats> {
+    const employeeVisitCounts = this.lastWeekVisitsLog.reduce((acc, employee) => {
+      acc[employee.name] = (acc[employee.name] || 0) + 1;
+
+      return acc;
+    }, {} as { [key: string]: number });
+
+    const lastWeekEmployeesVisits: { name: string, visits: number }[] = Object.entries(employeeVisitCounts)
+      .map(([name, visits]) => ({ name, visits: visits as number }))
+      .sort((a, b) => b.visits - a.visits)
+      .slice(0, 5);
+
     return of({
-      lastWeekLocationOccupancy: [],
-      lastWeekEmployeesVisits: [],
+      lastWeekLocationOccupancy: this.lastWeekLocationOccupancy,
+      lastWeekEmployeesVisits
     }).pipe(
       this.delayWithRandomError()
     );
